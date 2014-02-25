@@ -14,7 +14,15 @@ int osd_start_audio_stream(int stereo)
 	usestereo = stereo ? 1 : 0;
 
 	/* determine the number of samples per frame */
-	samples_per_frame = Machine->sample_rate / Machine->drv->frames_per_second;
+        //Fix for games like galaxian that have fractional fps
+        if(Machine->drv->frames_per_second > 60)
+        {
+                samples_per_frame = Machine->sample_rate / (int)Machine->drv->frames_per_second;
+        }
+        else
+        {
+                samples_per_frame = Machine->sample_rate / Machine->drv->frames_per_second;
+        }
 
 	if (Machine->sample_rate == 0) return 0;
 
