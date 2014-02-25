@@ -2008,6 +2008,9 @@ void YM2151UpdateOne(int num, INT16 **buffers, int length)
 	}
 	#endif
 
+#ifdef clip_short
+	clip_short_pre();
+#endif
 	for (i=0; i<length; i++)
 	{
 
